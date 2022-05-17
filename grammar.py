@@ -25,10 +25,10 @@ def GRAM():
     emparejar('programa')
     emparejar('id')
     A()
-  elif token.tipo == "tipos" or token.tipo == "var" or token.tipo == "const" or token.tipo == "inicio" or False:
+  elif token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "inicio" or False:
     A()
   else:
-    errorSintaxis(['programa', 'tipos', 'var', 'const', 'inicio']);
+    errorSintaxis(['programa', 'var', 'const', 'tipos', 'inicio']);
 def A():
   if token.tipo == "const" or False:
     emparejar('const')
@@ -48,20 +48,20 @@ def A():
   else:
     errorSintaxis(['const', 'tipos', 'var', 'inicio']);
 def C():
-  if token.tipo == "inicio" or token.tipo == "var" or token.tipo == "tipos" or token.tipo == "const" or token.tipo == "id" or False:
+  if token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "inicio" or token.tipo == "id" or False:
     CONST()
   else:
-    errorSintaxis(['inicio', 'var', 'tipos', 'const', 'id']);
+    errorSintaxis(['var', 'const', 'tipos', 'inicio', 'id']);
 def T():
-  if token.tipo == "inicio" or token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "id" or False:
+  if token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "inicio" or token.tipo == "id" or False:
     TYPE()
   else:
-    errorSintaxis(['inicio', 'var', 'const', 'tipos', 'id']);
+    errorSintaxis(['var', 'const', 'tipos', 'inicio', 'id']);
 def V():
-  if token.tipo == "inicio" or token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "id" or False:
+  if token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "inicio" or token.tipo == "id" or False:
     VAR()
   else:
-    errorSintaxis(['inicio', 'var', 'const', 'tipos', 'id']);
+    errorSintaxis(['var', 'const', 'tipos', 'inicio', 'id']);
 def P():
   if token.tipo == "inicio" or False:
     emparejar('inicio')
@@ -85,17 +85,17 @@ def CONST():
     TCONST()
     OPTCOMMA()
     CONST()
-  elif token.tipo == "const" or token.tipo == "var" or token.tipo == "tipos" or token.tipo == "inicio" or False:
+  elif token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "inicio" or False:
     return
   else:
-    errorSintaxis(['id', 'const', 'var', 'tipos', 'inicio']);
+    errorSintaxis(['id', 'var', 'const', 'tipos', 'inicio']);
 def OPTCOMMA():
   if token.tipo == ";" or False:
     emparejar(';')
-  elif token.tipo == "inicio" or token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "id" or False:
+  elif token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "inicio" or token.tipo == "id" or False:
     return
   else:
-    errorSintaxis([';', 'inicio', 'var', 'const', 'tipos', 'id']);
+    errorSintaxis([';', 'var', 'const', 'tipos', 'inicio', 'id']);
 def TCONST():
   if token.tipo == "tk_cadena" or False:
     emparejar('tk_cadena')
@@ -111,10 +111,10 @@ def TYPE():
     emparejar(':')
     TTYPE()
     TYPE()
-  elif token.tipo == "const" or token.tipo == "var" or token.tipo == "tipos" or token.tipo == "inicio" or False:
+  elif token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "inicio" or False:
     return
   else:
-    errorSintaxis(['id', 'const', 'var', 'tipos', 'inicio']);
+    errorSintaxis(['id', 'var', 'const', 'tipos', 'inicio']);
 def TTYPE():
   if token.tipo == "numerico" or False:
     emparejar('numerico')
@@ -134,10 +134,10 @@ def VAR():
   if token.tipo == "id" or False:
     emparejar('id')
     OTHERSVARS()
-  elif token.tipo == "inicio" or token.tipo == "}" or token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or False:
+  elif token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "inicio" or token.tipo == "}" or False:
     return
   else:
-    errorSintaxis(['id', 'inicio', '}', 'var', 'const', 'tipos']);
+    errorSintaxis(['id', 'var', 'const', 'tipos', 'inicio', '}']);
 def OTHERSVARS():
   if token.tipo == "," or False:
     emparejar(',')
@@ -160,10 +160,10 @@ def COMMAOPYC():
     emparejar(';')
   elif token.tipo == "," or False:
     emparejar(',')
-  elif token.tipo == "inicio" or token.tipo == "}" or token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "id" or False:
+  elif token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "inicio" or token.tipo == "id" or token.tipo == "}" or False:
     return
   else:
-    errorSintaxis([';', ',', 'inicio', '}', 'var', 'const', 'tipos', 'id']);
+    errorSintaxis([';', ',', 'var', 'const', 'tipos', 'inicio', 'id', '}']);
 def TVAR():
   if token.tipo == "numerico" or False:
     emparejar('numerico')
@@ -222,13 +222,13 @@ def MATX():
   else:
     errorSintaxis(['matriz']);
 def MATXARGS():
-  if token.tipo == "tk_numero" or token.tipo == "*" or token.tipo == "id" or False:
+  if token.tipo == "id" or token.tipo == "*" or token.tipo == "tk_numero" or False:
     TMATXARG()
     emparejar(',')
     TMATXARG()
     TMATX3()
   else:
-    errorSintaxis(['tk_numero', '*', 'id']);
+    errorSintaxis(['id', '*', 'tk_numero']);
 def TMATXARG():
   if token.tipo == "*" or False:
     emparejar('*')
@@ -268,22 +268,22 @@ def REG():
   else:
     errorSintaxis(['registro']);
 def NREG():
-  if token.tipo == "}" or token.tipo == "id" or False:
+  if token.tipo == "id" or token.tipo == "}" or False:
     VAR()
   elif token.tipo == "{" or False:
     emparejar('{')
     NREG()
     emparejar('}')
   else:
-    errorSintaxis(['}', 'id', '{']);
+    errorSintaxis(['id', '}', '{']);
 def PROGRAM():
-  if token.tipo == "mientras" or token.tipo == "desde" or token.tipo == "eval" or token.tipo == "repetir" or token.tipo == "si" or token.tipo == "retorna" or token.tipo == "id" or False:
+  if token.tipo == "eval" or token.tipo == "mientras" or token.tipo == "retorna" or token.tipo == "si" or token.tipo == "repetir" or token.tipo == "desde" or token.tipo == "id" or False:
     STCE()
     PROGRAM()
-  elif token.tipo == "fin" or token.tipo == "hasta" or token.tipo == "caso" or token.tipo == "sino" or token.tipo == "}" or False:
+  elif token.tipo == "sino" or token.tipo == "caso" or token.tipo == "hasta" or token.tipo == "fin" or token.tipo == "}" or False:
     return
   else:
-    errorSintaxis(['mientras', 'desde', 'eval', 'repetir', 'si', 'retorna', 'id', 'fin', 'hasta', 'caso', 'sino', '}']);
+    errorSintaxis(['eval', 'mientras', 'retorna', 'si', 'repetir', 'desde', 'id', 'sino', 'caso', 'hasta', 'fin', '}']);
 def STCE():
   if token.tipo == "si" or False:
     emparejar('si')
@@ -316,14 +316,14 @@ def TIPOSCTE():
   else:
     errorSintaxis(['[', '=', '.', '(']);
 def ASIG():
-  if token.tipo == "[" or token.tipo == "=" or token.tipo == "." or False:
+  if token.tipo == "." or token.tipo == "=" or token.tipo == "[" or False:
     INDEX()
     POINT()
     emparejar('=')
     E()
     OPCOMMA()
   else:
-    errorSintaxis(['[', '=', '.']);
+    errorSintaxis(['.', '=', '[']);
 def FUNC():
   if token.tipo == "(" or False:
     emparejar('(')
@@ -334,18 +334,18 @@ def FUNC():
 def OPCOMMA():
   if token.tipo == ";" or False:
     emparejar(';')
-  elif token.tipo == "fin" or token.tipo == "hasta" or token.tipo == "caso" or token.tipo == "mientras" or token.tipo == "desde" or token.tipo == "eval" or token.tipo == "sino" or token.tipo == "}" or token.tipo == "si" or token.tipo == "repetir" or token.tipo == "retorna" or token.tipo == "id" or False:
+  elif token.tipo == "eval" or token.tipo == "mientras" or token.tipo == "retorna" or token.tipo == "si" or token.tipo == "sino" or token.tipo == "repetir" or token.tipo == "desde" or token.tipo == "caso" or token.tipo == "hasta" or token.tipo == "fin" or token.tipo == "id" or token.tipo == "}" or False:
     return
   else:
-    errorSintaxis([';', 'fin', 'hasta', 'caso', 'mientras', 'desde', 'eval', 'sino', '}', 'si', 'repetir', 'retorna', 'id']);
+    errorSintaxis([';', 'eval', 'mientras', 'retorna', 'si', 'sino', 'repetir', 'desde', 'caso', 'hasta', 'fin', 'id', '}']);
 def ARGSFUNC():
-  if token.tipo == "-" or token.tipo == "tk_numero" or token.tipo == "tk_logico" or token.tipo == "not" or token.tipo == "tk_cadena" or token.tipo == "(" or token.tipo == "{" or token.tipo == "id" or False:
+  if token.tipo == "tk_cadena" or token.tipo == "not" or token.tipo == "tk_numero" or token.tipo == "{" or token.tipo == "tk_logico" or token.tipo == "(" or token.tipo == "id" or token.tipo == "-" or False:
     E()
     MARGSFUNC()
   elif token.tipo == ")" or False:
     return
   else:
-    errorSintaxis(['-', 'tk_numero', 'tk_logico', 'not', 'tk_cadena', '(', '{', 'id', ')']);
+    errorSintaxis(['tk_cadena', 'not', 'tk_numero', '{', 'tk_logico', '(', 'id', '-', ')']);
 def MARGSFUNC():
   if token.tipo == "," or False:
     emparejar(',')
@@ -397,12 +397,12 @@ def MPOINTS():
     MPOINTS()
   elif token.tipo == "=" or False:
     return
-  elif token.tipo == "[" or token.tipo == "=" or False:
+  elif token.tipo == "=" or token.tipo == "[" or False:
     INDEX()
   else:
-    errorSintaxis(['.', '=', '[', '=']);
+    errorSintaxis(['.', '=', '=', '[']);
 def E():
-  if token.tipo == "tk_numero" or token.tipo == "tk_logico" or token.tipo == "tk_cadena" or token.tipo == "id" or False:
+  if token.tipo == "tk_cadena" or token.tipo == "id" or token.tipo == "tk_logico" or token.tipo == "tk_numero" or False:
     TIPOT()
     EV()
   elif token.tipo == "(" or False:
@@ -410,7 +410,7 @@ def E():
     E()
     emparejar(')')
     EV()
-  elif token.tipo == "-" or token.tipo == "not" or False:
+  elif token.tipo == "not" or token.tipo == "-" or False:
     ECHANGE()
     E()
   elif token.tipo == "{" or False:
@@ -418,7 +418,7 @@ def E():
     EXPARR()
     emparejar('}')
   else:
-    errorSintaxis(['tk_numero', 'tk_logico', 'tk_cadena', 'id', '(', '-', 'not', '{']);
+    errorSintaxis(['tk_cadena', 'id', 'tk_logico', 'tk_numero', '(', 'not', '-', '{']);
 def ECHANGE():
   if token.tipo == "-" or False:
     emparejar('-')
@@ -427,15 +427,15 @@ def ECHANGE():
   else:
     errorSintaxis(['-', 'not']);
 def EV():
-  if token.tipo == "-" or token.tipo == "*" or token.tipo == "and" or token.tipo == "^" or token.tipo == "tk_comparation" or token.tipo == "or" or token.tipo == "%" or token.tipo == "/" or token.tipo == "+" or False:
+  if token.tipo == "+" or token.tipo == "*" or token.tipo == "^" or token.tipo == "or" or token.tipo == "/" or token.tipo == "%" or token.tipo == "tk_comparation" or token.tipo == "and" or token.tipo == "-" or False:
     OP()
     E()
   elif token.tipo == ";" or False:
     emparejar(';')
-  elif token.tipo == "]" or token.tipo == "fin" or token.tipo == "hasta" or token.tipo == ")" or token.tipo == "caso" or token.tipo == "mientras" or token.tipo == "desde" or token.tipo == "eval" or token.tipo == "sino" or token.tipo == "}" or token.tipo == "si" or token.tipo == "{" or token.tipo == "repetir" or token.tipo == "," or token.tipo == "retorna" or token.tipo == ";" or token.tipo == "id" or False:
+  elif token.tipo == ";" or token.tipo == "eval" or token.tipo == "]" or token.tipo == "mientras" or token.tipo == "{" or token.tipo == ")" or token.tipo == "sino" or token.tipo == "retorna" or token.tipo == "si" or token.tipo == "repetir" or token.tipo == "desde" or token.tipo == "caso" or token.tipo == "," or token.tipo == "hasta" or token.tipo == "fin" or token.tipo == "id" or token.tipo == "}" or False:
     return
   else:
-    errorSintaxis(['-', '*', 'and', '^', 'tk_comparation', 'or', '%', '/', '+', ';', ']', 'fin', 'hasta', ')', 'caso', 'mientras', 'desde', 'eval', 'sino', '}', 'si', '{', 'repetir', ',', 'retorna', ';', 'id']);
+    errorSintaxis(['+', '*', '^', 'or', '/', '%', 'tk_comparation', 'and', '-', ';', ';', 'eval', ']', 'mientras', '{', ')', 'sino', 'retorna', 'si', 'repetir', 'desde', 'caso', ',', 'hasta', 'fin', 'id', '}']);
 def TIPOT():
   if token.tipo == "id" or False:
     emparejar('id')
@@ -453,10 +453,10 @@ def TIPOID():
     ACCESS()
   elif token.tipo == "(" or False:
     FUNC()
-  elif token.tipo == "fin" or token.tipo == "mientras" or token.tipo == "and" or token.tipo == "repetir" or token.tipo == "," or token.tipo == "tk_comparation" or token.tipo == ";" or token.tipo == "id" or token.tipo == "+" or token.tipo == "hasta" or token.tipo == "eval" or token.tipo == "*" or token.tipo == "si" or token.tipo == "{" or token.tipo == "or" or token.tipo == "%" or token.tipo == "]" or token.tipo == ")" or token.tipo == "desde" or token.tipo == "retorna" or token.tipo == "/" or token.tipo == "-" or token.tipo == "caso" or token.tipo == "sino" or token.tipo == "}" or token.tipo == "^" or False:
+  elif token.tipo == "+" or token.tipo == "*" or token.tipo == "or" or token.tipo == "mientras" or token.tipo == "sino" or token.tipo == "and" or token.tipo == "id" or token.tipo == "-" or token.tipo == "{" or token.tipo == ")" or token.tipo == "retorna" or token.tipo == "si" or token.tipo == "/" or token.tipo == "tk_comparation" or token.tipo == "fin" or token.tipo == ";" or token.tipo == "eval" or token.tipo == "repetir" or token.tipo == "hasta" or token.tipo == "}" or token.tipo == "^" or token.tipo == "]" or token.tipo == "desde" or token.tipo == "%" or token.tipo == "caso" or token.tipo == "," or False:
     return
   else:
-    errorSintaxis(['[', '.', '(', 'fin', 'mientras', 'and', 'repetir', ',', 'tk_comparation', ';', 'id', '+', 'hasta', 'eval', '*', 'si', '{', 'or', '%', ']', ')', 'desde', 'retorna', '/', '-', 'caso', 'sino', '}', '^']);
+    errorSintaxis(['[', '.', '(', '+', '*', 'or', 'mientras', 'sino', 'and', 'id', '-', '{', ')', 'retorna', 'si', '/', 'tk_comparation', 'fin', ';', 'eval', 'repetir', 'hasta', '}', '^', ']', 'desde', '%', 'caso', ',']);
 def OP():
   if token.tipo == "*" or False:
     emparejar('*')
@@ -481,11 +481,11 @@ def OP():
 def EXPARR():
   if token.tipo == "{" or token.tipo == "}" or False:
     MULTROWS()
-  elif token.tipo == "tk_numero" or token.tipo == "{" or token.tipo == "tk_cadena" or token.tipo == "}" or False:
+  elif token.tipo == "tk_cadena" or token.tipo == "{" or token.tipo == "tk_numero" or token.tipo == "}" or False:
     ACONST()
     MULTROWS()
   else:
-    errorSintaxis(['{', '}', 'tk_numero', '{', 'tk_cadena', '}']);
+    errorSintaxis(['{', '}', 'tk_cadena', '{', 'tk_numero', '}']);
 def MULTROWS():
   if token.tipo == "{" or False:
     MATXARR()
@@ -510,13 +510,13 @@ def MATXARR():
   else:
     errorSintaxis(['{']);
 def ACONST():
-  if token.tipo == "tk_numero" or token.tipo == "tk_cadena" or False:
+  if token.tipo == "tk_cadena" or token.tipo == "tk_numero" or False:
     TARR()
     MACONST()
   elif token.tipo == "{" or token.tipo == "}" or False:
     return
   else:
-    errorSintaxis(['tk_numero', 'tk_cadena', '{', '}']);
+    errorSintaxis(['tk_cadena', 'tk_numero', '{', '}']);
 def MACONST():
   if token.tipo == "," or False:
     emparejar(',')
@@ -541,10 +541,10 @@ def DESDE():
     emparejar('{')
     PROGRAM()
     emparejar('}')
-  elif token.tipo == "fin" or token.tipo == "hasta" or token.tipo == "caso" or token.tipo == "mientras" or token.tipo == "desde" or token.tipo == "eval" or token.tipo == "sino" or token.tipo == "}" or token.tipo == "si" or token.tipo == "repetir" or token.tipo == "retorna" or token.tipo == "id" or False:
+  elif token.tipo == "eval" or token.tipo == "mientras" or token.tipo == "retorna" or token.tipo == "si" or token.tipo == "sino" or token.tipo == "repetir" or token.tipo == "desde" or token.tipo == "caso" or token.tipo == "hasta" or token.tipo == "fin" or token.tipo == "id" or token.tipo == "}" or False:
     return
   else:
-    errorSintaxis(['id', 'fin', 'hasta', 'caso', 'mientras', 'desde', 'eval', 'sino', '}', 'si', 'repetir', 'retorna', 'id']);
+    errorSintaxis(['id', 'eval', 'mientras', 'retorna', 'si', 'sino', 'repetir', 'desde', 'caso', 'hasta', 'fin', 'id', '}']);
 def DES():
   if token.tipo == "id" or False:
     emparejar('id')
@@ -570,13 +570,13 @@ def MANAGEIDM():
     emparejar('(')
     ARGSFUNC()
     emparejar(')')
-  elif token.tipo == "-" or token.tipo == "*" or token.tipo == "and" or token.tipo == "^" or token.tipo == "tk_comparation" or token.tipo == "or" or token.tipo == "%" or token.tipo == "/" or token.tipo == "+" or False:
+  elif token.tipo == "+" or token.tipo == "*" or token.tipo == "^" or token.tipo == "or" or token.tipo == "/" or token.tipo == "%" or token.tipo == "tk_comparation" or token.tipo == "and" or token.tipo == "-" or False:
     OP()
     TIPOM()
   elif token.tipo == "{" or token.tipo == "paso" or False:
     return
   else:
-    errorSintaxis(['(', '-', '*', 'and', '^', 'tk_comparation', 'or', '%', '/', '+', '{', 'paso']);
+    errorSintaxis(['(', '+', '*', '^', 'or', '/', '%', 'tk_comparation', 'and', '-', '{', 'paso']);
 def TIPOM():
   if token.tipo == "tk_numero" or False:
     emparejar('tk_numero')
@@ -607,35 +607,35 @@ def SINOSI():
   if token.tipo == "sino" or False:
     emparejar('sino')
     SI()
-  elif token.tipo == "sino" or token.tipo == "}" or token.tipo == "id" or False:
+  elif token.tipo == "id" or token.tipo == "sino" or token.tipo == "}" or False:
     return
   else:
-    errorSintaxis(['sino', 'sino', '}', 'id']);
+    errorSintaxis(['sino', 'id', 'sino', '}']);
 def SI():
-  if token.tipo == "sino" or token.tipo == "}" or token.tipo == "id" or False:
+  if token.tipo == "id" or token.tipo == "sino" or token.tipo == "}" or False:
     PROGRAMSI()
   elif token.tipo == "si" or False:
     emparejar('si')
     E()
     PROGRAMSI()
   else:
-    errorSintaxis(['sino', '}', 'id', 'si']);
+    errorSintaxis(['id', 'sino', '}', 'si']);
 def PROGRAMSI():
-  if token.tipo == "sino" or token.tipo == "id" or False:
+  if token.tipo == "id" or token.tipo == "sino" or False:
     STCESI()
     PROGRAMSI()
-  elif token.tipo == "sino" or token.tipo == "}" or token.tipo == "id" or False:
+  elif token.tipo == "id" or token.tipo == "sino" or token.tipo == "}" or False:
     return
   else:
-    errorSintaxis(['sino', 'id', 'sino', '}', 'id']);
+    errorSintaxis(['id', 'sino', 'id', 'sino', '}']);
 def STCESI():
   if token.tipo == "id" or False:
     emparejar('id')
     TIPOSCTE()
-  elif token.tipo == "sino" or token.tipo == "}" or token.tipo == "id" or False:
+  elif token.tipo == "id" or token.tipo == "sino" or token.tipo == "}" or False:
     SINOSI()
   else:
-    errorSintaxis(['id', 'sino', '}', 'id']);
+    errorSintaxis(['id', 'id', 'sino', '}']);
 def LOOPS():
   if token.tipo == "(" or False:
     WHILE()
@@ -656,14 +656,14 @@ def WHILE():
   else:
     errorSintaxis(['(']);
 def DOWHILE():
-  if token.tipo == "hasta" or token.tipo == "mientras" or token.tipo == "desde" or token.tipo == "eval" or token.tipo == "si" or token.tipo == "repetir" or token.tipo == "retorna" or token.tipo == "id" or False:
+  if token.tipo == "eval" or token.tipo == "mientras" or token.tipo == "retorna" or token.tipo == "si" or token.tipo == "repetir" or token.tipo == "desde" or token.tipo == "hasta" or token.tipo == "id" or False:
     PROGRAM()
     emparejar('hasta')
     emparejar('(')
     E()
     emparejar(')')
   else:
-    errorSintaxis(['hasta', 'mientras', 'desde', 'eval', 'si', 'repetir', 'retorna', 'id']);
+    errorSintaxis(['eval', 'mientras', 'retorna', 'si', 'repetir', 'desde', 'hasta', 'id']);
 def EVAL():
   if token.tipo == "{" or False:
     emparejar('{')
@@ -710,10 +710,10 @@ def RET():
   if token.tipo == "retorna" or False:
     emparejar('retorna')
     TSUBARG()
-  elif token.tipo == "const" or token.tipo == "var" or token.tipo == "tipos" or token.tipo == "inicio" or False:
+  elif token.tipo == "var" or token.tipo == "const" or token.tipo == "tipos" or token.tipo == "inicio" or False:
     return
   else:
-    errorSintaxis(['retorna', 'const', 'var', 'tipos', 'inicio']);
+    errorSintaxis(['retorna', 'var', 'const', 'tipos', 'inicio']);
 def SUBRUTINE():
   if token.tipo == "inicio" or False:
     emparejar('inicio')
