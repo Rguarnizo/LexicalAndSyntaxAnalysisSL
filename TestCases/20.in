@@ -1,0 +1,28 @@
+programa declaraciones_variables_const_tipos_3
+
+const
+  TACHADO = TRUE
+  NO_TACHADO = FALSE
+  
+tipos
+  INFO_PAL_RESERV : registro
+  {
+    pal : cadena // "if", "while", etc.
+   lex : LEXEMA // su valor numerico simbolico
+  }
+  
+  INFO_SIMB  registro
+  { 
+    nombre : cadena
+    tipo : TTipo
+    dir : numerico
+    val_inicial : numerico
+  }
+
+var
+  tabs : vector [MAX_SIMBOLOS] INFO_SIMB
+  cs : numerico  
+
+inicio
+  imprimir ("Hola, aquí solo se hacen declaraciones de variables, tipos y constantes")
+fin

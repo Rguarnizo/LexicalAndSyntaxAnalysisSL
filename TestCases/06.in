@@ -1,0 +1,11 @@
+programa declaraciones_variables
+
+var
+  n, suma, k : numerico
+  v_disp, // Velocidad inicial
+  a_disp : numerico // Angulo de disparo
+  a_disp_rad : numerico; // Igual que a_disp pero en radianes
+  h_max : numerico // Altura maxima
+inicio
+  imprimir ("Hola, aquí solo se hacen declaraciones de variables")
+fin

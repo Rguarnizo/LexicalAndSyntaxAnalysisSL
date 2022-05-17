@@ -1,0 +1,14 @@
+
+var
+  total : numerico
+  num : numerico
+inicio
+  total = 0
+  num = 1000
+  mientras  num <= 9999 )
+  {
+    total = total + num
+    num = num + 1
+  }
+  imprimir ("\nSerá recaudada la suma de Gs. ", total);
+fin

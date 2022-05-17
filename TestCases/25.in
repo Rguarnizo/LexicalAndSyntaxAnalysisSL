@@ -1,0 +1,11 @@
+var
+  a, b, c : numerico
+inicio
+  leer (a, b, c)
+  si 
+  {
+    imprimir ("\nNo pueden ser los lados de un triángulo")
+  sino
+    imprimir ("\nPueden formar un triángulo")
+}
+fin

@@ -1,0 +1,22 @@
+/*
+OBJETIVO: Calcular cuanto se recaudará en un sorteo, si vendemos
+todos los tickets numerados del 1000 al 9999.
+AUTOR: desconocido
+OBSERVACION: El autor de este programa no sabe que la formula directa
+para calcular el total de guaranies es:
+total = (ult_numero – prim_numero + 1) / 2 * (prim_num + ult_numero)
+Por eso hace un programa largo usando ciclos.
+*/
+var
+  total : numerico
+  num : numerico
+inicio
+  total = 0
+  num = 1000
+  mientras ( num <= 9999 )
+  {
+    total = total + num
+    num = num + 1
+  }
+  imprimir ("\nSerá recaudada la suma de Gs. ", total);
+fin

@@ -1,0 +1,8 @@
+var
+k : numerico
+inicio
+desde k=10 hasta i*2 paso -j+1
+{
+imprimir ("\n", k, " :\t", k^2)
+}
+fin

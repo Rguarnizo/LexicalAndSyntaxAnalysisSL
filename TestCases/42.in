@@ -1,0 +1,47 @@
+var
+  A , T : matriz [*,*] numerico
+  f, c : numerico
+inicio
+  A = {{10, 11, 12},
+       {20, 21, 22},
+       {30, 31, 32},
+       {40, 41, 42},
+       {50, 51, 52}
+      }
+  imprimir ("\nMatriz original\n")
+  impr_mat (A)
+  T = trasp (A)
+  imprimir ("\nMatriz traspuesta\n")
+  impr_mat (T)
+fin
+
+
+subrutina prueba(a, b, otro: numerico; : cadena; ref flag:logico; obj:CLASE) //ERROR
+inicio
+  imprimir ("prueba de parámetros")
+fin
+
+
+subrutina trasp (m : matriz [*,*] numerico) retorna matriz [*,*] numerico
+/*
+OBJETIVO: Producir la traspuesta de la matriz m.
+Se asume que m tiene igual cantidad de columnas en todas sus filas,
+es decir, tiene contorno regular.
+*/
+var
+  t : matriz [*,*] numerico
+  cf, cc : numerico // cantidad de filas y columnas de m
+  kf, kc : numerico // indice de fila y columna
+inicio
+  cf = alen (m [1])
+  cc = alen (m)
+  dim (t, cf, cc)
+  desde kf=1 hasta cf
+  {
+    desde kc=1 hasta cc
+    {
+       t [kf, kc] = m [kc, kf]
+    }
+  }
+  retorna ( t )
+fin

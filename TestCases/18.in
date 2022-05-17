@@ -1,0 +1,16 @@
+programa declaraciones_variables_const_tipos_1
+
+const
+  TACHADO = TRUE
+  NO_TACHADO = FALSE
+tipos
+  VEC_PRIMOS : vector [*] logico
+  LEXEMA : numerico
+var
+  N : numerico
+  tk: LEXEMA
+  P : VEC_PRIMOS
+
+inicio
+  imprimir ("Hola, aquÃ­ solo se hacen declaraciones de variables, tipos y constantes")
+fin

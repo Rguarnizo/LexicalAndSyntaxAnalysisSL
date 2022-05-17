@@ -1,0 +1,29 @@
+/*
+OBJETIVO: Clasificar un carácter ingresado por el usuario en
+letra mayúscula, letra minúscula, dígito o algún otro.
+AUTOR: jsegovia
+*/
+var
+  let : cadena
+  msg : cadena
+inicio
+  leer (let)
+/*
+Consideremos solo el primer carácter, por si haya tipeado
+más de uno.
+Observar cómo se usan los corchetes para seleccionar el
+primer carácter.
+*/
+  let = let [1]
+  eval
+  {
+    caso ( let >= 'A' and let <= 'Z' )
+      msg = "letra mayúscula"
+    caso ( let >= 'a' and let <= 'z' )
+      msg = "letra minúscula"
+    caso  let >= '0' and let <= '9' )
+      msg = "dígito"
+    
+  }
+  imprimir ("\nEl carácter que usted ingresó es ", msg)
+fin

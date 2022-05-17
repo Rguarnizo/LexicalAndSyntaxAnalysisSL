@@ -1,0 +1,4 @@
+subrutina imprimir_explicacion()
+inicio
+imprimir ("\nEste programa no tiene main")
+fin

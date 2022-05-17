@@ -1,0 +1,20 @@
+const
+  inicio_tabla = 32;
+  fin_tabla = 255
+  INCR = 16
+  RELLENO = ' '
+var
+  k, tope : numerico
+inicio
+  k[1,2,3,4] = a;
+fin
+
+subrutina prt_ascii (v1, v2 : numerico; r : cadena)
+var
+  k : numerico
+inicio
+  desde k=v1 hasta v2
+  {
+    imprimir ( ascii (k), r)
+  }
+fin

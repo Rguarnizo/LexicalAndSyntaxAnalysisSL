@@ -1,0 +1,10 @@
+programa declaraciones_variables_const
+
+const
+  RAIZ_3 = 1.732050808
+var
+  a, h : numerico
+
+inicio
+  imprimir ("Hola, aquí solo se hacen declaraciones de variables y constantes")
+fin

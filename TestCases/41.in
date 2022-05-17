@@ -1,0 +1,78 @@
+/*
+OBJETIVO: Calcular e imprimir la suma de los primeros n
+numeros enteros. Muestra el uso de subrutinas.
+AUTOR: jsegovia
+*/
+var
+  tot : numerico
+  n : numerico
+inicio
+  cls()
+  imprimir_explicacion()
+  imprimir ("Numero entero? ")
+  leer (n)
+  calcular_suma (n)
+  imprimir ("\nLa suma de los primeros ", n, "números enteros es ", tot)
+fin
+
+/* continuación del programa ejemplo_llamada_subrutinas */
+subrutina imprimir_explicacion()
+inicio
+  imprimir ("\nEste programa de ejemplo calcula la suma de los enteros",
+            "\npositivos comprendidos entre 1 y un valor ",  
+            "que se ingresa\n")
+fin
+
+subrutina prueba(a, b, otro: numerico; c: cadena; ref flag:logico; obj:CLASE)
+inicio
+  imprimir ("prueba de parámetros")
+fin
+
+subrutina impr_vect (v : vector [*] numerico)
+var
+  k : numerico
+inicio
+  desde k=1 hasta alen (v)
+  {
+    imprimir (v [k], ' ')
+  }
+fin
+
+subrutina calcular_suma (ref entero_tope : numerico) retorna numerico
+/*
+Ejemplo de subrutina que recibe un parametro.
+*/
+var
+k : numerico
+inicio
+  tot = 0
+  desde k = 1 hasta entero_tope
+  {
+    tot = tot + k
+  }
+  retorna (total)
+fin
+
+subrutina trasp (m : matriz [*,*] numerico) retorna matriz [*,*] numerico
+/*
+OBJETIVO: Producir la traspuesta de la matriz m.
+Se asume que m tiene igual cantidad de columnas en todas sus filas,
+es decir, tiene contorno regular.
+*/
+var
+  t : matriz [*,*] numerico
+  cf, cc : numerico // cantidad de filas y columnas de m
+  kf, kc : numerico // indice de fila y columna
+inicio
+  cf = alen (m [1])
+  cc = alen (m)
+  dim (t, cf, cc)
+  desde kf=1 hasta cf
+  {
+    desde kc=1 hasta cc
+    {
+       t [kf, kc] = m [kc, kf]
+    }
+  }
+  retorna ( t )
+fin

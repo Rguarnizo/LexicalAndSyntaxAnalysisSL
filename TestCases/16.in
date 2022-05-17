@@ -1,0 +1,16 @@
+programa declaraciones_variables_const_3
+
+
+const
+  inicio_tabla = 32;
+  fin_tabla = 255
+  INCR 16
+  RELLENO = ' '
+var
+  k, tope : numerico  
+const
+  RAIZ_3 = 1.732050808
+  
+inicio
+  imprimir ("Hola, aquí solo se hacen declaraciones de variables y constantes")
+fin
