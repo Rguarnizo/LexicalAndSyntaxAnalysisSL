@@ -300,3 +300,113 @@ izq,der = [x[0] for x in filter_rules],[x[1:] for x in filter_rules]
 
 for x,y in zip(izq,der):
     print(x,"->",y)
+
+print({x:y for x,y in zip(izq,der)})
+
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+{
+    'Programa': ['ProgramaFirma BloqueDeclaraciones inicio BloqueSentencias ListaSentencias fin SubrutinasLista'
+                 ],
+    'ProgramaFirma': ['programa id', '\xce\xb5'],
+    'ListaDeclaraciones': ['Declaraciones ListaDeclaraciones',
+                           '\xce\xb5'],
+    'BloqueDeclaraciones': ['Declaraciones ListaDeclaraciones',
+                            '\xce\xb5'],
+    'Declaraciones': ['var id MasTiposVar : TipoDato FinSentencia ListaVarTipo'
+                      ],
+    'ListaConst': ['AsignacionConst FinSentencia ListaConst', '\xce\xb5'
+                   ],
+    'ListaVarTipo': ['id MasTiposVar : TipoDato FinSentencia ListaVarTipo'
+                     , '\xce\xb5'],
+    'TipoDato': ['TipoBasico', 'TipoComplejo'],
+    'TipoBasico': ['numerico', 'cadena', 'logico', 'id'],
+    'TipoComplejo': ['vector [ VectorTamanio ] TipoBasico',
+                     'matriz [ MatrizTamanio ] TipoBasico',
+                     'registro { ListaVarTipo }'],
+    'VectorTamanio': ['VectorValor'],
+    'MatrizTamanio': ['VectorValor MatrizTamanioLista'],
+    'MatrizTamanioLista': [', MatrizTamanio', '\xce\xb5'],
+    'VectorValor': ['*', 'Expresion'],
+    'ListaArgumentos': [', Argumento ListaArgumentos', '\xce\xb5'],
+    'CuerpoSi': ['ListaSentencias SinoSentenciaLista'],
+    'SinoSiSentencia': ['si ( Expresion ) ListaSentencias'],
+    'ListaSentencias': ['BloqueSentencias ListaSentencias', '\xce\xb5'
+                        ],
+    'BloqueSentencias': ['Sentencia FinSentencia'],
+    'FinSentencia': ['\xce\xb5', ';'],
+    'Sentencia': [
+        'SentenciaAsignFunc',
+        'SentenciaMientras',
+        'SentenciaRepetirHasta',
+        'SentenciaEval',
+        'SentenciaDesde',
+        'SentenciaRetorna',
+        'SentenciaSi',
+        ],
+    'SentenciaSi': ['si ( Expresion ) { CuerpoSi }'],
+    'SinoSentenciaLista': ['\xce\xb5',
+                           'SinoSentencia SinoSentenciaLista'],
+    'SinoSentencia': ['sino SinoSiSentencia'],
+    'SentenciaMientras': ['mientras ( Expresion ) { ListaSentencias }'
+                          ],
+    'SentenciaRepetirHasta': ['repetir ListaSentencias hasta ( Expresion )'
+                              ],
+    'SentenciaEval': ['eval { EvalCuerpo ListaCasosEval SinoEval }'],
+    'ListaCasosEval': ['EvalCuerpo ListaCasosEval', '\xce\xb5'],
+    'EvalCuerpo': ['caso ( Expresion ) ListaSentencias'],
+    'SinoEval': ['sino ListaSentencias', '\xce\xb5'],
+    'SentenciaDesde': ['desde SentenciaAsignFunc hasta Expresion OpcionalPaso { ListaSentencias }'
+                       ],
+    'OpcionalPaso': ['paso Expresion', '\xce\xb5'],
+    'SentenciaRetorna': ['retorna ( Expresion )'],
+    'AsignacionConst': ['Id = Expresion'],
+    'SentenciaAsignFunc': ['Id SentenciaId'],
+    'SentenciaId': ['= Expresion', '( Argumento ListaArgumentos )'],
+    'Argumento': ['Expresion', '\xce\xb5'],
+    'Elemento': ['\xce\xb5'],
+    'Expresion': ['NegacionOpcional ExpresionTerminal ExpresionOperador'
+                  ],
+    'ExpresionOperador': ['\xce\xb5'],
+    'ExpresionFin': ['NegacionOpcional ExpresionTerminal ExpresionOperador'
+                     ],
+    'ExpresionTerminal': ['TRUE', 'FALSE', 'SI', 'NO', 'Objeto'],
+    'NumIdTerminal': ['num', 'Id FuncionId'],
+    'FuncionId': ['\xce\xb5', '( Argumento ListaArgumentos )'],
+    'Signo': ['\xce\xb5', '+', '-'],
+    'NegacionOpcional': ['not', '\xce\xb5'],
+    'Operador': [
+        '+',
+        '-',
+        '*',
+        '/',
+        '%',
+        '^',
+        'and',
+        'or',
+        '<',
+        '>',
+        '<=',
+        '>=',
+        '==',
+        '<>',
+        ],
+    'Objeto': ['{ Elemento ListaObjetos }'],
+    'ListaObjetos': [', Expresion ListaObjetos', '\xce\xb5'],
+    'Id': ['id IdCompuesto'],
+    'IdCompuesto': ['IdValores', '. Id', '\xce\xb5'],
+    'IdValores': ['[ Expresion ListaValoresMatriz ]'],
+    'ListaValoresMatriz': [', Expresion ListaValoresMatriz', '\xce\xb5'
+                           ],
+    'SubrutinasLista': ['BloqueSubrutinas SubrutinasLista', '\xce\xb5'
+                        ],
+    'ArgumentosSubrutina': ['RefIndicador id MasTiposVar : TipoDato MasArgumentosSubrutina'
+                            , '\xce\xb5'],
+    'MasArgumentosSubrutina': ['; RefIndicador id MasTiposVar : TipoDato MasArgumentosSubrutina'
+                               , '\xce\xb5'],
+    'RefIndicador': ['ref', '\xce\xb5'],
+    'RetornoOpcional': ['retorna TipoDato', '\xce\xb5'],
+    'BloqueSubrutinas': ['subrutina id ( ArgumentosSubrutina ) RetornoOpcional BloqueDeclaraciones inicio BloqueSentencias ListaSentencias fin'
+                         ],
+    'MasTiposVar': [', id MasTiposVar', '\xce\xb5 '],
+    }
