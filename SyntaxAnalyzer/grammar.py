@@ -128,3 +128,175 @@ Gramatica = {
         "TSUBARG" : (["numerico"],["cadena"],["logico"],["id"],["VEC"],["MATX"]),
 
 }
+
+
+grammarAngel = """Programa->ProgramaFirma BloqueDeclaraciones inicio BloqueSentencias ListaSentencias fin SubrutinasLista
+ProgramaFirma->programa id
+ProgramaFirma->ε
+ListaDeclaraciones->Declaraciones ListaDeclaraciones
+ListaDeclaraciones->ε
+BloqueDeclaraciones->Declaraciones ListaDeclaraciones
+BloqueDeclaraciones->ε
+Declaraciones->const AsignacionConst FinSentencia ListaConst
+ListaConst->AsignacionConst FinSentencia ListaConst
+ListaConst->ε
+Declaraciones->tipos id MasTiposVar : TipoDato FinSentencia ListaVarTipo
+ListaVarTipo->id MasTiposVar : TipoDato FinSentencia ListaVarTipo
+ListaVarTipo->ε
+Declaraciones->var id MasTiposVar : TipoDato FinSentencia ListaVarTipo
+TipoDato->TipoBasico
+TipoDato->TipoComplejo
+TipoBasico->numerico
+TipoBasico->cadena
+TipoBasico->logico
+TipoBasico->id
+TipoComplejo->vector [ VectorTamanio ] TipoBasico
+TipoComplejo->matriz [ MatrizTamanio ] TipoBasico
+TipoComplejo->registro { ListaVarTipo }
+VectorTamanio->VectorValor
+MatrizTamanio->VectorValor MatrizTamanioLista
+MatrizTamanioLista->, MatrizTamanio
+MatrizTamanioLista->ε
+VectorValor->*
+VectorValor->Expresion
+ListaArgumentos->, Argumento ListaArgumentos
+ListaArgumentos->ε
+CuerpoSi->ListaSentencias SinoSentenciaLista
+SinoSiSentencia->ListaSentencias
+ListaSentencias->BloqueSentencias ListaSentencias
+ListaSentencias->ε
+BloqueSentencias->Sentencia FinSentencia
+FinSentencia->ε
+FinSentencia->;
+Sentencia->SentenciaAsignFunc
+Sentencia->SentenciaMientras
+Sentencia->SentenciaRepetirHasta
+Sentencia->SentenciaEval
+Sentencia->SentenciaDesde
+Sentencia->SentenciaRetorna
+Sentencia->SentenciaSi
+SentenciaSi->si ( Expresion ) { CuerpoSi }
+SinoSentenciaLista->ε
+SinoSentenciaLista->SinoSentencia SinoSentenciaLista
+SinoSentencia->sino SinoSiSentencia
+SinoSiSentencia->si ( Expresion ) ListaSentencias
+SentenciaMientras->mientras ( Expresion ) { ListaSentencias }
+SentenciaRepetirHasta->repetir ListaSentencias hasta ( Expresion )
+SentenciaEval->eval { EvalCuerpo ListaCasosEval SinoEval }
+ListaCasosEval->EvalCuerpo ListaCasosEval
+ListaCasosEval->ε
+EvalCuerpo->caso ( Expresion ) ListaSentencias
+SinoEval->sino ListaSentencias
+SinoEval->ε
+SentenciaDesde->desde SentenciaAsignFunc hasta Expresion OpcionalPaso { ListaSentencias }
+OpcionalPaso->paso Expresion
+OpcionalPaso->ε
+SentenciaRetorna->retorna ( Expresion )
+AsignacionConst->Id = Expresion
+SentenciaAsignFunc->Id SentenciaId
+SentenciaId->= Expresion
+SentenciaId->( Argumento ListaArgumentos )
+Argumento->Expresion
+Argumento->ε
+Elemento->Expresion
+Expresion->NegacionOpcional ExpresionTerminal ExpresionOperador
+ExpresionOperador->Operador ExpresionFin
+ExpresionFin->NegacionOpcional ExpresionTerminal ExpresionOperador
+ExpresionOperador->ε
+ExpresionTerminal->( Expresion )
+ExpresionTerminal->Signo NumIdTerminal
+NumIdTerminal->num
+NumIdTerminal->Id FuncionId
+FuncionId->ε
+FuncionId->( Argumento ListaArgumentos )
+Signo->ε
+Signo->+
+Signo->-
+ExpresionTerminal->cadena_
+NegacionOpcional->not
+NegacionOpcional->ε
+ExpresionTerminal->TRUE
+ExpresionTerminal->FALSE
+ExpresionTerminal->SI
+ExpresionTerminal->NO
+ExpresionTerminal->Objeto
+Operador->+
+Operador->-
+Operador->*
+Operador->/
+Operador->%
+Operador->^
+Operador->and
+Operador->or
+Operador-><
+Operador->>
+Operador-><=
+Operador->>=
+Operador->==
+Operador-><>
+Objeto->{ Elemento ListaObjetos }
+Elemento->ε
+ListaObjetos->, Expresion ListaObjetos
+ListaObjetos->ε
+Id->id IdCompuesto
+IdCompuesto->IdValores
+IdCompuesto->. Id
+IdCompuesto->ε
+IdValores->[ Expresion ListaValoresMatriz ]
+ListaValoresMatriz->, Expresion ListaValoresMatriz
+ListaValoresMatriz->ε
+SubrutinasLista->BloqueSubrutinas SubrutinasLista
+SubrutinasLista->ε
+ArgumentosSubrutina->RefIndicador id MasTiposVar : TipoDato MasArgumentosSubrutina
+ArgumentosSubrutina->ε
+MasArgumentosSubrutina->; RefIndicador id MasTiposVar : TipoDato MasArgumentosSubrutina
+MasArgumentosSubrutina->ε
+RefIndicador->ref
+RefIndicador->ε
+RetornoOpcional->retorna TipoDato
+RetornoOpcional->ε
+BloqueSubrutinas->subrutina id ( ArgumentosSubrutina ) RetornoOpcional BloqueDeclaraciones inicio BloqueSentencias ListaSentencias fin
+MasTiposVar->, id MasTiposVar
+MasTiposVar->ε """.split("\n");
+
+
+
+
+rules = [x.split("->") for x in grammarAngel];
+i = 0
+
+print(len(rules))
+while(i != len(rules)-1):
+    actual_rule = rules[i][0]
+    index_rule = i;
+    try:
+        while(actual_rule == rules[i+1][0]):
+            rules[index_rule].append(rules[i+1][1]);
+            i+=1;
+    except:
+        continue;
+    i+=1;
+
+filter_rules = []
+i = 0
+while(i != len(rules)-1):
+
+    actual_rule = rules[i][0]
+    filter_rules.append(rules[i]);
+    try:
+        while(actual_rule == rules[i+1][0]):
+            i+=1
+        i+=1
+    except:
+        continue
+
+
+
+for x in filter_rules:
+    print(x);
+
+izq,der = [x[0] for x in filter_rules],[x[1:] for x in filter_rules]
+
+
+for x,y in zip(izq,der):
+    print(x,"->",y)
